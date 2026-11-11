@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="Modelo_Elevador">
+<EventDeclList>
+<EventDecl Kind="PROPOSITION" Name=":accepting"/>
+<EventDecl Kind="CONTROLLABLE" Name="UP"/>
+<EventDecl Kind="CONTROLLABLE" Name="DOWN"/>
+<EventDecl Kind="CONTROLLABLE" Name="STOP"/>
+<EventDecl Kind="CONTROLLABLE" Name="OPEN1"/>
+<EventDecl Kind="CONTROLLABLE" Name="CLOSE1"/>
+<EventDecl Kind="CONTROLLABLE" Name="OPEN2"/>
+<EventDecl Kind="CONTROLLABLE" Name="CLOSE2"/>
+<EventDecl Kind="CONTROLLABLE" Name="OPEN3"/>
+<EventDecl Kind="CONTROLLABLE" Name="CLOSE3"/>
+</EventDeclList>
+<ComponentList>
+<SimpleComponent Kind="PLANT" Name="Elevator">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="Idle">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="80"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-22" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="-6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="Up">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="0"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="-10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="Down">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-44" Y="-6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="Idle" Target="Up">
+<LabelBlock>
+<SimpleIdentifier Name="UP"/>
+<LabelGeometry Anchor="NW">
+<Point X="-43" Y="-25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="84" Y="40"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="e_floor +=1">
+<SimpleIdentifier Name="e_floor"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+<BinaryExpression Operator="+=" Text="state_e1 +=1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-81" Y="-11"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="Up" Target="Idle">
+<LabelBlock>
+<SimpleIdentifier Name="STOP"/>
+<LabelGeometry Anchor="NW">
+<Point X="4" Y="-7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="108" Y="40"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="state_e1 -=1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="1" Y="4"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="Idle" Target="Down">
+<LabelBlock>
+<SimpleIdentifier Name="DOWN"/>
+<LabelGeometry Anchor="NW">
+<Point X="15" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="120"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="e_floor -=1">
+<SimpleIdentifier Name="e_floor"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+<BinaryExpression Operator="-=" Text="state_e1 -=1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="7" Y="-5"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="Down" Target="Idle">
+<LabelBlock>
+<SimpleIdentifier Name="STOP"/>
+<LabelGeometry Anchor="NW">
+<Point X="-43" Y="-10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="88" Y="120"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="state_e1 +=1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-69" Y="1"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="Down" Target="Down">
+<LabelBlock>
+<SimpleIdentifier Name="DOWN"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="2"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="95" Y="196"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="e_floor -=1">
+<SimpleIdentifier Name="e_floor"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="13"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="Up" Target="Up">
+<LabelBlock>
+<SimpleIdentifier Name="UP"/>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="-34"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="98" Y="-36"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="e_floor +=1">
+<SimpleIdentifier Name="e_floor"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="-21"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<VariableComponent Name="e_floor">
+<VariableRange><BinaryExpression Operator="..">
+<IntConstant Value="1"/>
+<IntConstant Value="3"/>
+</BinaryExpression>
+</VariableRange>
+<VariableInitial><BinaryExpression Operator="==" Text="e_floor == 1">
+<SimpleIdentifier Name="e_floor"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</VariableInitial>
+</VariableComponent>
+<SimpleComponent Kind="PLANT" Name="D1">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="D1C">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="D1O">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="176" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="D1C" Target="D1O">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="-34"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="96"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="d1_open +=1">
+<SimpleIdentifier Name="d1_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-22"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="D1O" Target="D1C">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="3"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="128"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="d1_open -=1">
+<SimpleIdentifier Name="d1_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="13"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<VariableComponent Name="d1_open">
+<VariableRange><BinaryExpression Operator="..">
+<IntConstant Value="0"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</VariableRange>
+<VariableInitial><BinaryExpression Operator="==" Text="d1_open == [close]">
+<SimpleIdentifier Name="d1_open"/>
+<EnumSetExpression>
+<SimpleIdentifier Name="close"/>
+</EnumSetExpression>
+</BinaryExpression>
+</VariableInitial>
+</VariableComponent>
+<SimpleComponent Kind="PLANT" Name="D2">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="D2C">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="D2O">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="176" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="D2C" Target="D2O">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-32"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="96"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="d2_open +=1">
+<SimpleIdentifier Name="d2_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-22"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="D2O" Target="D2C">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="2"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="128"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="d2_open -=1">
+<SimpleIdentifier Name="d2_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="13"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<VariableComponent Name="d2_open">
+<VariableRange><BinaryExpression Operator="..">
+<IntConstant Value="0"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</VariableRange>
+<VariableInitial><BinaryExpression Operator="==" Text="d2_open == 0">
+<SimpleIdentifier Name="d2_open"/>
+<IntConstant Value="0"/>
+</BinaryExpression>
+</VariableInitial>
+</VariableComponent>
+<SimpleComponent Kind="PLANT" Name="D3">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="D2C">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="D2O">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="176" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="D2C" Target="D2O">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN3"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-32"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="96"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="+=" Text="d2_open +=1">
+<SimpleIdentifier Name="d2_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-22"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="D2O" Target="D2C">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE3"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="2"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="128"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Actions>
+<BinaryExpression Operator="-=" Text="d2_open -=1">
+<SimpleIdentifier Name="d2_open"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Actions>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="13"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<VariableComponent Name="d3_open">
+<VariableRange><BinaryExpression Operator="..">
+<IntConstant Value="0"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</VariableRange>
+<VariableInitial><BinaryExpression Operator="==" Text="d3_open == 0">
+<SimpleIdentifier Name="d3_open"/>
+<IntConstant Value="0"/>
+</BinaryExpression>
+</VariableInitial>
+</VariableComponent>
+<SimpleComponent Kind="SPEC" Name="ED">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="F1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="48"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-8"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="F2">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="-9"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="F3">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="208"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="OD1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="144" Y="48"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="11" Y="-6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="OD2">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="144" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="10" Y="-7"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="OD3">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="144" Y="208"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="10" Y="-7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="F1" Target="OD1">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="32"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="state_e1 ==1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="-31"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="OD1" Target="F1">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="64"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F2" Target="OD2">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-12" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="112"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="state_e1 ==1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="-27"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="OD2" Target="F2">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="144"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F3" Target="OD3">
+<LabelBlock>
+<SimpleIdentifier Name="OPEN3"/>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="-20"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="105" Y="196"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="state_e1 ==1">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="-29"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="OD3" Target="F3">
+<LabelBlock>
+<SimpleIdentifier Name="CLOSE3"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="2"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="224"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F1" Target="F2">
+<LabelBlock>
+<SimpleIdentifier Name="UP"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="-10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="84" Y="88"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F2" Target="F1">
+<LabelBlock>
+<SimpleIdentifier Name="DOWN"/>
+<LabelGeometry Anchor="NW">
+<Point X="-51" Y="-11"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="44" Y="88"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F2" Target="F3">
+<LabelBlock>
+<SimpleIdentifier Name="UP"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="-9"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="80" Y="168"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="F3" Target="F2">
+<LabelBlock>
+<SimpleIdentifier Name="DOWN"/>
+<LabelGeometry Anchor="NW">
+<Point X="-50" Y="-6"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="48" Y="168"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<VariableComponent Name="state_e1">
+<VariableRange><BinaryExpression Operator="..">
+<IntConstant Value="0"/>
+<IntConstant Value="2"/>
+</BinaryExpression>
+</VariableRange>
+<VariableInitial><BinaryExpression Operator="==">
+<SimpleIdentifier Name="state_e1"/>
+<IntConstant Value="1"/>
+</BinaryExpression>
+</VariableInitial>
+</VariableComponent>
+</ComponentList>
+</Module>
