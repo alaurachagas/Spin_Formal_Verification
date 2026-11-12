@@ -1,6 +1,6 @@
 // Define the number of floors and elevatorsin the building
-#define NUM_FLOORS 3
-#define NUM_ELEVATORS 1
+#define NUM_FLOORS 5
+#define NUM_ELEVATORS 2
 
 // Define the possible states of the elevator
 // mtype = {IDLE, MOVING_UP, MOVING_DOWN};
@@ -8,6 +8,7 @@
 // Define the state variables for the elevator
 byte elevator_floor[NUM_ELEVATORS];
 // mtype elevator_state[NUM_ELEVATORS];
+
 // Define the state variables for the doors
 bit doorisopen[NUM_FLOORS * NUM_ELEVATORS];
 
@@ -15,7 +16,7 @@ bit doorisopen[NUM_FLOORS * NUM_ELEVATORS];
 // and the doors. {floor, elevator_id, door_state}
 chan openclosedoor = [0] of {byte, byte, bit};
 
-// Door (floor, elevator) process
+// Door(floor, elevator) process
 proctype door(byte f; byte e) {
     do
     // Wait for a message from the elevator to open or close the door
@@ -30,7 +31,7 @@ proctype door(byte f; byte e) {
     od
 }
 
-// Elevator (id) process
+// Elevator(id) process
 proctype elevator(byte id) {
     do
     // Move the elevator up or down one floor, if possible
@@ -44,7 +45,7 @@ proctype elevator(byte id) {
     // Open the door
     ::  (doorisopen[(elevator_floor[id-1]-1)*NUM_ELEVATORS + (id-1)] == 0) -> 
         openclosedoor!elevator_floor[id-1],id,1;
-        openclosedoor?eval(elevator_floor[id-1]),eval(id),0;
+        openclosedoor?eval(elevator_floor[id-1]),eval(id),1;
     // Close the door
     ::  (doorisopen[(elevator_floor[id-1]-1)*NUM_ELEVATORS + (id-1)] == 1) -> 
         openclosedoor!elevator_floor[id-1],id,0;
@@ -55,14 +56,37 @@ proctype elevator(byte id) {
 // Initialize the state variables and start the processes
 init {
     atomic {
+        run elevator(1);
+        run elevator(2);
+
         elevator_floor[0] = 1;
+        elevator_floor[1] = 1;
         // elevator_state[0] = IDLE;
+        // elevator_state[1] = IDLE;
 
         run door(1, 1);
         run door(2, 1);
         run door(3, 1);
+        run door(4, 1);
+        run door(5, 1);
 
-        run elevator(1);
+        run door(1, 2);
+        run door(2, 2);
+        run door(3, 2);
+        run door(4, 2);
+        run door(5, 2);
+
+        doorisopen[0] = 0;
+        doorisopen[1] = 0;
+        doorisopen[2] = 0;
+        doorisopen[3] = 0;
+        doorisopen[4] = 0;
+        doorisopen[5] = 0;
+        doorisopen[6] = 0;
+        doorisopen[7] = 0;
+        doorisopen[8] = 0;
+        doorisopen[9] = 0;
+        doorisopen[10] = 0;    
     }
 }
 
